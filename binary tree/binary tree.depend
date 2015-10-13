@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1444763798 source:c:\users\achyut\documents\github\thirdsem\binary tree\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+
