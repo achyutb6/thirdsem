@@ -23,9 +23,6 @@ struct nodetype{
 };
 typedef struct nodetype *nodeptr;
 
-int a[100];
-int i=0;
-
 /**< Function to get a node from dynamic memory
  *Type -Struct node pointer*/
 nodeptr getnode()
@@ -85,25 +82,19 @@ nodeptr lca(nodeptr tree, int n1, int n2)
 
     return tree;
 }
+// C function to search a given key in a given BST
+nodeptr search(nodeptr root, int key)
+{
+    // Base Cases: root is null or key is present at root
+    if (root == NULL || root->info == key)
+       return root;
 
-void preorder(nodeptr tree)
-{
-    if(tree!=NULL){
-        a[i]=tree->info;
-        i++;
-        preorder(tree->left);
-        preorder(tree->right);
-    }
-}
-int search(int b[100],int key)
-{
-    int flag=1;
-    for(i=0;i<10;i++)
-    {
-        if(key==b[i])
-            flag=0;
-    }
-    return flag;
+    // Key is greater than root's key
+    if (root->info < key)
+       return search(root->right, key);
+
+    // Key is smaller than root's key
+    return search(root->left, key);
 }
 
 /** MAIN FUNCTION */
@@ -113,7 +104,7 @@ int main()
     nodeptr tree,temp;
     nodeptr p,q;
 
-    printf("Enter integer values for tree\n");      /**Create a binary search tree*/
+    printf("Enter integer values for tree\n");
     scanf("%d",&num);
     tree=maketree(num);
     while(scanf("%d",&num)!=EOF)
@@ -135,17 +126,6 @@ int main()
     }
     printf("Enter values for n1 and n2\n");
     scanf("%d%d",&n1,&n2);
-    preorder(tree);
-    if(search(a,n1))
-    {
-        printf("n1 not present in tree \n");    /**Check is n1 is present*/
-        exit(1);
-    }
-    if(search(a,n2))
-    {
-        printf("n2 not present in tree\n ");    /**Check is n2 is present*/
-        exit(1);
-    }
     temp=lca(tree,n1,n2);
 
     printf("LCA of %d and %d is %d \n", n1, n2, temp->info);
